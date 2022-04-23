@@ -295,7 +295,7 @@ bool SocketIOclient::setNamespace() {
     return false;
 }
 bool SocketIOclient::emit(String event_name, String _payload) {
-    String msg = "42/" + nsp + ",[\"" + event_name + "\"" + "," + _payload + "]";
+    String msg = "42/" + nsp + ",1[\"" + event_name + "\"" + "," + _payload + "]";
     Serial.println(msg);
 
     uint8_t * payload = (uint8_t *)msg.c_str();
