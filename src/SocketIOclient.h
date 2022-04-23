@@ -104,7 +104,7 @@ class SocketIOclient : protected WebSocketsClient {
   // Socket io with namespace
   public:
     void connect(String host, uint16_t port, String name_space = "", String url = "/socket.io/?EIO=4", String protocol = "arduino");
-    bool emit(String event_name, String payload);
+    bool emit(String event_name, String payload, int transactionId = 0);
 
   protected:
     String nsp;
