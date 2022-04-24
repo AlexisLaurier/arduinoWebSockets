@@ -105,7 +105,7 @@ class SocketIOclient : protected WebSocketsClient {
   public:
     void connect(String host, uint16_t port, String name_space = "", String url = "/socket.io/?EIO=4", String protocol = "arduino");
     bool emit(String event_name, String payload, int transactionId = 0);
-
+    bool emitAck(int transactionId, String _payload);
   protected:
     String nsp;
     bool setNamespace();
