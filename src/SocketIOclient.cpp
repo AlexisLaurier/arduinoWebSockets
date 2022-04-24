@@ -315,3 +315,24 @@ bool SocketIOclient::emit(String event_name, String _payload, , int transactionI
     }
     return false;
 }
+
+
+bool SocketIOclient::emitAck(int transactionId, String _payload) {
+    String effectiveTransactionId = transactionId > 0 ? String(transactionId) : "";
+    String msg = "43/" + nsp + "," + effectiveTransactionId + "[" + _payload + "]";
+    uint8_t * payload = (uint8_t *)msg.c_str();
+
+    size_t length = msg.length();
+
+    bool ret = false;
+    if(clientIsConnected(&_client) && _client.status == WSC_CONNECTED) {
+        ret = WebSocketsClient::sendFrameHeader(&_client, WSop_text, length, true);
+
+        // send data
+        if(ret && payload && length > 0) {
+            ret = WebSocketsClient::write(&_client, payload, length);
+        }
+        return ret;
+    }
+    return false;
+}
