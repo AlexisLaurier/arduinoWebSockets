@@ -318,7 +318,7 @@ bool SocketIOclient::emit(String event_name, String _payload, , int transactionI
 
 
 bool SocketIOclient::emitAck(int transactionId, String _payload) {
-    String effectiveTransactionId = transactionId > 0 ? String(transactionId) : "";
+    String effectiveTransactionId = transactionId >= 0 ? String(transactionId) : "";
     String msg = "43/" + nsp + "," + effectiveTransactionId + "[" + _payload + "]";
     uint8_t * payload = (uint8_t *)msg.c_str();
 
