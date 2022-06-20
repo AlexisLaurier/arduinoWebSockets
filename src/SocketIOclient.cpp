@@ -294,11 +294,9 @@ bool SocketIOclient::setNamespace() {
     }
     return false;
 }
-bool SocketIOclient::emit(String event_name, String _payload, , int transactionId) {
+bool SocketIOclient::emit(String event_name, String _payload, int transactionId) {
     String effectiveTransactionId = transactionId > 0 ? String(transactionId) : "";
     String msg = "42/" + nsp + "," + effectiveTransactionId + "[\"" + event_name + "\"" + "," + _payload + "]";
-    Serial.println(msg);
-
     uint8_t * payload = (uint8_t *)msg.c_str();
 
     size_t length = msg.length();
@@ -315,7 +313,6 @@ bool SocketIOclient::emit(String event_name, String _payload, , int transactionI
     }
     return false;
 }
-
 
 bool SocketIOclient::emitAck(int transactionId, String _payload) {
     String effectiveTransactionId = transactionId >= 0 ? String(transactionId) : "";
